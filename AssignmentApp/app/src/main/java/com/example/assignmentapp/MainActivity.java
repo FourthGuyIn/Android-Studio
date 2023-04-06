@@ -3,6 +3,7 @@ package com.example.assignmentapp;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.ui.AppBarConfiguration;
 
 import com.example.assignmentapp.databinding.ActivityMainBinding;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.Calendar;
 
@@ -25,6 +28,9 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView mSelectedDateTextView;
     private ViewGroup mContainer;
+    Button logout;
+    FirebaseAuth auth;
+    FirebaseUser user;
 
     String[] courses = {"PROG2007", "OSYS1000", "PROG1400", "APPD1001", "PROG2700", "SAAD1001","COMM2700"};
 
@@ -36,6 +42,24 @@ public class MainActivity extends AppCompatActivity {
 
         mSelectedDateTextView = findViewById(R.id.selected_date_text_view);
         mContainer = findViewById(R.id.myContainer);
+
+        auth = FirebaseAuth.getInstance();
+        logout = findViewById(R.id.logOut);
+        user = auth.getCurrentUser();
+        if (user == null) {
+            Intent intent = new Intent(getApplicationContext(), Login.class);
+            startActivity(intent);
+            finish();
+        }
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseAuth.getInstance().signOut();
+                Intent intent = new Intent(getApplicationContext(), Login.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
         Button myButton = findViewById(R.id.Create_Assignment);
         myButton.setOnClickListener(new View.OnClickListener() {

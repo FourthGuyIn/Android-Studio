@@ -9,4 +9,13 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="email" />
+    <string name="Password">Password</string>
+    <string name="Email">Email</string>
+    <string name="Login">Login</string>
+    <string name="Register">Register</string>
+    <string name="click_to_login">Click To Login</string>
+    <string name="click_to_register">click_to_register</string>
+    <string name="clicktoregister">Click to register</string>
+    <string name="Click_to_login">Click to login</string>
 </resources>
