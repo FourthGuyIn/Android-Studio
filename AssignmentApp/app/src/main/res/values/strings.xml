@@ -18,4 +18,8 @@
     <string name="click_to_register">click_to_register</string>
     <string name="clicktoregister">Click to register</string>
     <string name="Click_to_login">Click to login</string>
+    <string name="AssignmentApp">Navigation Drawer</string>
+    <!-- to toggle the open close button of the navigation drawer -->
+    <string name="nav_open">Open</string>
+    <string name="nav_close">Close</string>
 </resources>

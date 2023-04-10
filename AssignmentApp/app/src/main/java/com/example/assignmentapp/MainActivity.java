@@ -5,40 +5,113 @@ import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
+import androidx.appcompat.widget.Toolbar;
 
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.ui.AppBarConfiguration;
 
 import com.example.assignmentapp.databinding.ActivityMainBinding;
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+
 
 import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
 
-    private AppBarConfiguration appBarConfiguration;
-    private ActivityMainBinding binding;
-
-    private TextView mSelectedDateTextView;
-    private ViewGroup mContainer;
+    public DrawerLayout drawerLayout;
+    public ActionBarDrawerToggle actionBarDrawerToggle;
     Button logout;
     FirebaseAuth auth;
     FirebaseUser user;
+    String[] courses = {"PROG2007", "OSYS1000", "PROG1400", "APPD1001", "PROG2700", "SAAD1001", "COMM2700"};
+    private AppBarConfiguration appBarConfiguration;
+    private ActivityMainBinding binding;
+    private NavigationView navigationView;
+    private TextView mSelectedDateTextView;
+    private ViewGroup mContainer;
 
-    String[] courses = {"PROG2007", "OSYS1000", "PROG1400", "APPD1001", "PROG2700", "SAAD1001","COMM2700"};
+    private ActionBar actionBar;
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.navigation_menu, menu);
+        return true;
+    }
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                drawerLayout.openDrawer(GravityCompat.START);
+                return true;
+            case R.id.nav_account:
+                // Handle My Account click
+                return true;
+            case R.id.nav_settings:
+                // Handle Settings click
+                return true;
+            case R.id.nav_logout:
+                FirebaseAuth.getInstance().signOut();
+                Intent intent = new Intent(getApplicationContext(), Login.class);
+                startActivity(intent);
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Inflate the layout using view binding
         binding = ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(R.layout.activity_main);
+        setContentView(binding.getRoot());
+
+        // Get the ActionBar object
+        actionBar = getSupportActionBar();
+
+        // Set up the navigation drawer
+        drawerLayout = binding.drawerLayout;
+        navigationView = binding.navView;
+        actionBarDrawerToggle = new ActionBarDrawerToggle(
+                this,
+                drawerLayout,
+                R.string.nav_open,
+                R.string.nav_close
+        );
+        drawerLayout.addDrawerListener(actionBarDrawerToggle);
+        actionBarDrawerToggle.syncState();
+
+        // Set up the ActionBar if it exists
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
+
+        // Set up the navigation menu item click listener
+        navigationView.setNavigationItemSelectedListener(item -> {
+            // Handle navigation menu item clicks here
+            return true;
+        });
+
+        Toolbar toolbar = binding.myToolbar;
+        setSupportActionBar(toolbar);
 
         mSelectedDateTextView = findViewById(R.id.selected_date_text_view);
         mContainer = findViewById(R.id.myContainer);
@@ -51,6 +124,8 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         }
+
+
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -60,6 +135,7 @@ public class MainActivity extends AppCompatActivity {
                 finish();
             }
         });
+
 
         Button myButton = findViewById(R.id.Create_Assignment);
         myButton.setOnClickListener(new View.OnClickListener() {
@@ -125,5 +201,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
     }
+
 }
+
+

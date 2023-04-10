@@ -22,4 +22,6 @@
     <style name="Theme.AssignmentApp.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.AssignmentApp.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+
 </resources>
