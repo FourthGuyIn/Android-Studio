@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="android:popupMenuStyle">@style/PopupMenu</item>
+        <item name="android:popupWindowStyle">@style/PopupWindow</item>
+    </style>
+
+    <style name="PopupMenu" parent="Widget.AppCompat.PopupMenu">
+        <item name="android:popupBackground">@drawable/popup_menu_background</item>
+    </style>
+
+    <style name="PopupWindow" parent="Widget.AppCompat.PopupWindow">
+        <item name="android:popupBackground">@drawable/popup_window_background</item>
+    </style>
+</resources>
