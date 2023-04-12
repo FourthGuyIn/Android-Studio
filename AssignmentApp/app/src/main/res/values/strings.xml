@@ -27,6 +27,13 @@
     <string name="add_assignment_dialog_title">Add Assignment</string>
     <string name="add_assignment_dialog_add_button_text">Add</string>
     <string name="course_prompt">Select a course</string>
+    <string name="delete_button_text">Delete</string>
+    <string name="add">Add</string>
+    <string name="delete">Delete</string>
+    <string name="add_assignment_dialog_cancel_button_text">Cancel</string>
+    <string name="enter_assignment_description">Enter Assignment Description</string>
+    <string name="enter_assignment_name">Enter Assignment Name</string>
+    <string name="selected_date">Selected Date:</string>
 
 
 </resources>

@@ -2,4 +2,5 @@
 <resources>
     <item name="nav_view" type="id" />
     <item name="nav_list" type="id" />
+    <item name="btnAdd" type="id" />
 </resources>
