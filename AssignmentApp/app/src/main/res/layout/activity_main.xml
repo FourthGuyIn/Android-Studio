@@ -24,21 +24,12 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
-        <ScrollView
-            android:id="@+id/myScrollView"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:scrollbars="vertical"
             app:layout_constraintTop_toBottomOf="@+id/toolbar"
-            app:layout_constraintBottom_toTopOf="@+id/Create_Assignment">
-
-            <LinearLayout
-                android:id="@+id/myContainer"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical" />
-
-        </ScrollView>
+            app:layout_constraintBottom_toTopOf="@+id/Create_Assignment"/>
 
         <Button
             android:id="@+id/Create_Assignment"

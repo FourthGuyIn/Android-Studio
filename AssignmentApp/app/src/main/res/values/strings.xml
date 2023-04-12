@@ -24,5 +24,9 @@
     <string name="nav_close">Close</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close" />
+    <string name="add_assignment_dialog_title">Add Assignment</string>
+    <string name="add_assignment_dialog_add_button_text">Add</string>
+    <string name="course_prompt">Select a course</string>
+
 
 </resources>
