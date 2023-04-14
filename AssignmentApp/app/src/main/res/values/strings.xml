@@ -34,6 +34,7 @@
     <string name="enter_assignment_description">Enter Assignment Description</string>
     <string name="enter_assignment_name">Enter Assignment Name</string>
     <string name="selected_date">Selected Date:</string>
+    <string name="course_hint">Add a course</string>
 
 
 </resources>

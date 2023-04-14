@@ -11,12 +11,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
-public class AssignmentAdapter extends RecyclerView.Adapter<AssignmentAdapter.AssignmentViewHolder> {
+public class AssignmentAdapter extends RecyclerView.Adapter<AssignmentAdapter.AssignmentViewHolder> implements AssignmentAdapter2 {
 
-    private List<Assignment> assignments = new ArrayList<>();
-    private List<View> assignmentViews = new ArrayList<>();
+    private List<Assignment> assignments;
+    private AssignmentAdapter2 adapter2;
+
+    public AssignmentAdapter(List<Assignment> assignments, AssignmentAdapter2 adapter2) {
+        this.assignments = assignments;
+        this.adapter2 = adapter2;
+    }
 
     @NonNull
     @Override
@@ -27,8 +33,7 @@ public class AssignmentAdapter extends RecyclerView.Adapter<AssignmentAdapter.As
 
     @Override
     public void onBindViewHolder(@NonNull AssignmentViewHolder holder, int position) {
-        Assignment assignment = assignments.get(position);
-        holder.bind(assignment);
+        holder.bind(assignments.get(position));
     }
 
     @Override
@@ -41,15 +46,19 @@ public class AssignmentAdapter extends RecyclerView.Adapter<AssignmentAdapter.As
         notifyDataSetChanged();
     }
 
-    public void setAssignmentViews(List<View> assignmentViews) {
-        this.assignmentViews = assignmentViews;
+    @Override
+    public void onItemMove(int fromPosition, int toPosition) {
+        Collections.swap(assignments, fromPosition, toPosition);
+        notifyItemMoved(fromPosition, toPosition);
     }
 
-    public List<View> getAssignmentViews() {
-        return assignmentViews;
+    @Override
+    public void onItemDismiss(int position) {
+        assignments.remove(position);
+        notifyItemRemoved(position);
     }
 
-    static class AssignmentViewHolder extends RecyclerView.ViewHolder {
+    class AssignmentViewHolder extends RecyclerView.ViewHolder {
 
         private TextView courseTextView;
         private TextView nameTextView;
@@ -64,6 +73,11 @@ public class AssignmentAdapter extends RecyclerView.Adapter<AssignmentAdapter.As
             descriptionTextView = itemView.findViewById(R.id.description_text_view);
             dueDateTextView = itemView.findViewById(R.id.due_date_text_view);
             deleteButton = itemView.findViewById(R.id.delete_button);
+
+            deleteButton.setOnClickListener(view -> {
+                int position = getAdapterPosition();
+                adapter2.onItemDismiss(position);
+            });
         }
 
         public void bind(Assignment assignment) {
@@ -74,6 +88,10 @@ public class AssignmentAdapter extends RecyclerView.Adapter<AssignmentAdapter.As
         }
     }
 }
+
+
+
+
 
 
 
